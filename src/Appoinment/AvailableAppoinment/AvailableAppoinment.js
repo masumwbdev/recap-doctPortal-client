@@ -48,6 +48,7 @@ const AvailableAppoinment = ({ value }) => {
                 {
                     bookingAppoin.map(bookappoin => <Booking
                         bookappoin={bookappoin}
+                        value={value}
                     ></Booking>)
                 }
             </div>
