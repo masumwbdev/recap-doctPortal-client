@@ -15,7 +15,8 @@ const Booking = ({ bookappoin, value }) => {
                         <p class="card-text">{time}</p>
                         <p>{space}</p>
                         <button onClick={handleOpen} className='btn btn-sm btn-dark'>Book Appoinment</button>
-                    </div>
+                    </div>  
+                    
                 </div>
             </div>
             <BookingModal
