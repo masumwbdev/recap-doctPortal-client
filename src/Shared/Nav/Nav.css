@@ -2,4 +2,8 @@
     text-decoration: none;
     color: white;
     font-weight: 600;
+    font-size: 5px;
+}
+.nav-ancor:hover{
+    color: lightblue;
 }

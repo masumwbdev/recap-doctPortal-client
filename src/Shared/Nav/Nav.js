@@ -18,7 +18,6 @@ const Nav = () => {
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
-                        size="large"
                         edge="start"
                         color="inherit"
                         aria-label="menu"
@@ -29,7 +28,9 @@ const Nav = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         News
                     </Typography>
+                    <Link className='nav-ancor' to="/home"><Button color="inherit">Home</Button></Link>
                     <Link className='nav-ancor' to="/appoinment"><Button color="inherit">Appoinment</Button></Link>
+                    <Link className='nav-ancor' to="/contact"><Button color="inherit">Contact us</Button></Link>
                     {
                         user?.email ?
                         <Button onClick={logOut} color="inherit">Logout</Button>

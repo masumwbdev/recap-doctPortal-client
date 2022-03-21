@@ -4,7 +4,7 @@ import useAuth from '../../../hooks/useAuth';
 import Nav from '../../../Shared/Nav/Nav';
 
 const Login = () => {
-    const { googleAuth } = useAuth();
+    const { googleAuth, loginAuth } = useAuth();
     const [loginData, setLoginData] = useState({});
     const handleOnChange = e => {
         const field = e.target.name;
@@ -14,6 +14,7 @@ const Login = () => {
         setLoginData(newLoginData)
     }
     const handleLoginSubmit = e => {
+        loginAuth(loginData.email, loginData.password)
         e.preventDefault();
     }
     return (
