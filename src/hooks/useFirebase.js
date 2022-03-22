@@ -11,14 +11,14 @@ const useFirebase = () => {
   const auth = getAuth();
 
   // create register email password authentication
-  const registerUser = (email, password) => {
+  const registerUser = (email, password, navigate) => {
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         setAuthError('');
-        // ...
+        navigate('/')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -29,12 +29,13 @@ const useFirebase = () => {
   }
 
   // loging email pass auth
-  const loginAuth = (email, password) => {
+  const loginAuth = (email, password, location, navigate) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
+        // const user = userCredential.user;
+        const destination = location?.state?.from || '/'
+        navigate(destination);
         setAuthError('')
       })
       .catch((error) => {
@@ -45,7 +46,7 @@ const useFirebase = () => {
   }
 
   // google authentication
-  const googleAuth = () => {
+  const googleAuth = (location, navigate) => {
     setIsLoading(true);
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
@@ -55,8 +56,8 @@ const useFirebase = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        setAuthError('');
-        // ...
+        const destination = location?.state?.from || '/';
+        navigate(destination);
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;

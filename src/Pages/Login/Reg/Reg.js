@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import Nav from '../../../Shared/Nav/Nav';
 
 const Reg = () => {
     const { user, authError, googleAuth, registerUser, isLoading } = useAuth();
     const [loginData, setLoginData] = useState({});
+    const navigate = useNavigate();
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -18,7 +19,7 @@ const Reg = () => {
             alert('password did not matched')
             return;
         }
-        registerUser(loginData.email, loginData.password)
+        registerUser(loginData.email, loginData.password, navigate)
         e.preventDefault();
     }
     return (

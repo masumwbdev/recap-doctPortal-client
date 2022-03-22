@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import Nav from '../../../Shared/Nav/Nav';
 
 const Login = () => {
     const { googleAuth, loginAuth } = useAuth();
     const [loginData, setLoginData] = useState({});
+    const navigate = useNavigate();
+    const location = useLocation();
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -14,7 +16,7 @@ const Login = () => {
         setLoginData(newLoginData)
     }
     const handleLoginSubmit = e => {
-        loginAuth(loginData.email, loginData.password)
+        loginAuth(loginData.email, loginData.password, location, navigate)
         e.preventDefault();
     }
     return (
