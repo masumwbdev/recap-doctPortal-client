@@ -23,6 +23,7 @@ const Booking = ({ bookappoin, value }) => {
                 open={open}
                 handleClose={handleClose}
                 time={time}
+                name={name}
                 value={value}
             />
         </div>

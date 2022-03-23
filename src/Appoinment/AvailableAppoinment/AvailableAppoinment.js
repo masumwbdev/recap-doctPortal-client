@@ -40,7 +40,6 @@ const bookingAppoin = [
 ]
 
 const AvailableAppoinment = ({ value }) => {
-
     return (
         <div>
             <h1 className="text-center mb-4">{value.toDateString()}</h1>
