@@ -7,19 +7,20 @@ const Reg = () => {
     const { user, authError, googleAuth, registerUser, isLoading } = useAuth();
     const [loginData, setLoginData] = useState({});
     const navigate = useNavigate();
-    const handleOnChange = e => {
+    const handleOnBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData };
         newLoginData[field] = value;
         setLoginData(newLoginData)
+        console.log(newLoginData)
     }
     const handleLoginSubmit = e => {
         if (loginData.password !== loginData.password2) {
             alert('password did not matched')
             return;
         }
-        registerUser(loginData.email, loginData.password, navigate)
+        registerUser(loginData.email, loginData.password, loginData.name, navigate)
         e.preventDefault();
     }
     return (
@@ -29,11 +30,13 @@ const Reg = () => {
                 <h4 className='my-5'>Please login</h4>
                 {!isLoading &&
                     <form onSubmit={handleLoginSubmit}>
-                        <input type="email" placeholder='Your email' name='email' onChange={handleOnChange} />
+                        <input type="text" placeholder='Your name' name='name' onBlur={handleOnBlur} />
                         <br /><br />
-                        <input type="password" placeholder='Password' name='password' onChange={handleOnChange} />
+                        <input type="email" placeholder='Your email' name='email' onBlur={handleOnBlur} />
                         <br /><br />
-                        <input type="password" placeholder='Re-type password' name='password2' onChange={handleOnChange} />
+                        <input type="password" placeholder='Password' name='password' onBlur={handleOnBlur} />
+                        <br /><br />
+                        <input type="password" placeholder='Re-type password' name='password2' onBlur={handleOnBlur} />
                         <br /><br />
                         <button type='submit' className='btn btn-sm btn-dark fw-bold'>Register</button>
                     </form>}

@@ -1,5 +1,5 @@
 import initializeAuthentication from "../Pages/Login/Firebase/firebase.init"
-import { getAuth, signInWithPopup, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, GoogleAuthProvider, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState, useEffect } from 'react'
 
 initializeAuthentication();
@@ -11,13 +11,24 @@ const useFirebase = () => {
   const auth = getAuth();
 
   // create register email password authentication
-  const registerUser = (email, password, navigate) => {
+  const registerUser = (email, password, name, navigate) => {
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         setAuthError('');
+        const newUser = { email, displayName: name }
+        setUser(newUser);
+        updateProfile(auth.currentUser, {
+          displayName: name
+        }).then(() => {
+          // Profile updated!
+          // ...
+        }).catch((error) => {
+          // An error occurred
+          // ...
+        });
         navigate('/')
       })
       .catch((error) => {
